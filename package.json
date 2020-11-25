@@ -1,0 +1,21 @@
+{
+  "name": "smitter",
+  "version": "0.0.1",
+  "description": "A small event emitter",
+  "source": "index.js",
+  "jsnext:main": "dist/smitter.es.js",
+  "module": "dist/smitter.es.js",
+  "esmodules": "dist/smitter.modern.js",
+  "main": "dist/smitter.js",
+  "unpkg": "dist/smitter.umd.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "microbundle": "^0.12.4"
+  }
+}
