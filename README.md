@@ -14,10 +14,12 @@ npm i smitter
 // create an instance
 let emitter = smitter()
 
+// subscribe to an event called 'hi'
 let off = emitter.on('hi', (x) => {
   console.log(`hi ${x}!`)
 })
 
+// fire an event called 'hi' and pass data to the handler
 emitter.emit('hi', 'mom') // 'hi mom!' logged to console
 
 // remove subscription
