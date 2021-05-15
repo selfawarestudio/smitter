@@ -1,6 +1,6 @@
 {
   "name": "smitter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A small event emitter",
   "source": "index.js",
   "jsnext:main": "dist/smitter.es.js",

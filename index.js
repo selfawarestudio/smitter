@@ -3,14 +3,14 @@ export default function smitter() {
 
   return {
     emit(type, data) {
-      all[type] && all[type].map((fn) => fn(data))
+      return all[type] ? all[type].map((fn) => fn(data)) : []
     },
     on(type, fn) {
       all[type] = (all[type] || []).concat(fn)
-      let executed = false
+      let removed = false
       return () => {
-        if (!executed) {
-          executed = true
+        if (!removed) {
+          removed = true
           all[type].splice(all[type].indexOf(fn), 1)
         }
       }
