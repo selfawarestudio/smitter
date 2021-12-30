@@ -1,6 +1,6 @@
 # smitter
 
-smitter is a small 124 byte event emitter.
+smitter is a small 250 byte event emitter.
 
 ## Installation
 
@@ -17,7 +17,7 @@ import smitter from 'smitter'
 let emitter = smitter()
 
 // subscribe to an event called 'hi'
-let off = emitter.on('hi', (x) => {
+let off = emitter.on('hi', x => {
   console.log(`hi ${x}!`)
 })
 
