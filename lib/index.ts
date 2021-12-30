@@ -28,12 +28,12 @@ export let smitter = (): Smitter => {
      * @memberOf smitter
      */
     emit(type: EventType, payload?: any): void {
-      all[type] ? all[type].map((handler) => handler(payload)) : []
+      all[type] ? all[type].map(handler => handler(payload)) : []
     },
 
     /**
      * Add an event handler for the provided type.
-     * 
+     *
      * @param {EventType} type The name of the event to register
      * @param {Handler} handler Function to fire for the given event type
      * @returns {Function} Function to remove the event handler

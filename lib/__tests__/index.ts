@@ -10,7 +10,7 @@ class Mock {
 let instance = smitter()
 
 test('smitter', () => {
-  assert.type(smitter, 'function')  
+  assert.type(smitter, 'function')
   assert.type(instance, 'object')
   assert.type(instance.emit, 'function')
   assert.type(instance.on, 'function')
