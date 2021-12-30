@@ -4,9 +4,9 @@ import { resolve } from 'path'
 export default defineConfig({
   build: {
     target: 'esnext',
-    minify: 'terser',
+    minify: 'esbuild',
     lib: {
-      entry: resolve(__dirname, 'index.ts'),
+      entry: resolve(__dirname, 'lib/index.ts'),
       name: 'Smitter',
       formats: ['es', 'umd', 'iife']
     },

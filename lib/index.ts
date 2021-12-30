@@ -7,7 +7,7 @@ export type HandlerMap = {
 }
 
 export interface Smitter {
-  emit(type: EventType, payload: any): void
+  emit(type: EventType, payload?: any): void
   on(type: EventType, handler: Handler): () => void
 }
 
@@ -16,7 +16,7 @@ export interface Smitter {
  * @name smitter
  * @returns {Smitter}
  */
-export function smitter(): Smitter {
+export let smitter = (): Smitter => {
   let all: HandlerMap = {}
 
   return {
@@ -27,7 +27,7 @@ export function smitter(): Smitter {
      * @param {any} payload Optionally pass arbitrary data to each handler
      * @memberOf smitter
      */
-    emit(type: EventType, payload: any): void {
+    emit(type: EventType, payload?: any): void {
       all[type] ? all[type].map((handler) => handler(payload)) : []
     },
 
