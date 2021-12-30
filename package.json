@@ -20,8 +20,10 @@
     "dev": "watchlist lib -- pnpm test",
     "build": "vite build && tsc --emitDeclarationOnly && mv dist/lib dist/types",
     "test": "c8 uvu -r esbuild-register lib/__tests__",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "node scripts/release.js"
+    "prepare": "is-ci || pnpx husky install",
+    "typecheck": "tsc --noEmit",
+    "lint": "prettier --check .",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -32,17 +34,23 @@
   ],
   "author": "Mike Wagz",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/selfawarestudio/smitter/issues"
+  },
+  "homepage": "https://github.com/selfawarestudio/smitter#readme",
   "devDependencies": {
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
+    "@semantic-release/git": "^10.0.1",
     "@types/node": "^17.0.5",
     "c8": "^7.10.0",
-    "chalk": "^4.1.1",
-    "conventional-changelog-cli": "^2.2.2",
-    "enquirer": "^2.3.6",
+    "commitlint": "^16.0.1",
     "esbuild": "^0.14.9",
     "esbuild-register": "^3.3.1",
-    "execa": "^5.0.0",
+    "husky": "^7.0.4",
+    "is-ci": "^3.0.1",
     "prettier": "^2.5.1",
-    "semver": "^7.3.5",
+    "semantic-release": "^18.0.1",
     "typescript": "^4.5.4",
     "uvu": "^0.5.2",
     "vite": "^2.7.9",
