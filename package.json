@@ -2,20 +2,36 @@
   "name": "smitter",
   "version": "0.0.4",
   "description": "A small event emitter",
-  "source": "index.js",
-  "jsnext:main": "dist/smitter.es.js",
-  "module": "dist/smitter.es.js",
-  "esmodules": "dist/smitter.modern.js",
-  "main": "dist/smitter.js",
-  "unpkg": "dist/smitter.umd.js",
-  "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle watch"
+  "files": [
+    "dist"
+  ],
+  "main": "dist/smitter.umd.js",
+  "unpkg": "dist/smitter.iife.js",
+  "jsdelivr": "dist/smitter.iife.js",
+  "module": "./dist/smitter.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/smitter.es.js",
+      "require": "./dist/smitter.umd.js"
+    }
   },
-  "keywords": [],
-  "author": "",
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --emitDeclarationOnly"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selfawarestudio/smitter.git"
+  },
+  "keywords": [
+    "emitter"
+  ],
+  "author": "Mike Wagz",
   "license": "MIT",
   "devDependencies": {
-    "microbundle": "^0.12.4"
+    "@types/node": "^17.0.5",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.9"
   }
 }
