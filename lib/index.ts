@@ -2,7 +2,7 @@ type EventMap = Record<string, any>
 type EventType<T extends EventMap> = string & keyof T
 type Handler<T> = (payload: T) => void
 
-export type HandlerMap = {
+type HandlerMap = {
   [K in keyof EventMap]: Array<(p: EventMap[K]) => void>
 }
 
@@ -16,7 +16,7 @@ interface Smitter<T extends EventMap> {
  * @name smitter
  * @returns {Smitter}
  */
-export function smitter<T extends EventMap>(): Smitter<T> {
+export let smitter = <T extends EventMap>(): Smitter<T> => {
   let all: HandlerMap = {}
 
   return {
