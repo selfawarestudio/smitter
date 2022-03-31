@@ -11,7 +11,7 @@ npm i smitter
 ## Usage
 
 ```js
-import smitter from 'smitter'
+import { smitter } from 'smitter'
 
 // create an instance
 let emitter = smitter()
