@@ -7,7 +7,11 @@ class Mock {
   fn = (...args) => this.calls.push(args)
 }
 
-let instance = smitter()
+let instance = smitter<{
+  foo: number
+  bar: undefined
+  baz: { value: boolean }
+}>()
 
 test('smitter', () => {
   assert.type(smitter, 'function')
@@ -33,8 +37,23 @@ test('remove handler', () => {
   assert.equal(handler.calls.length, 1)
 })
 
+test('remove handler, called twice', () => {
+  let handler = new Mock()
+  instance.on('foo', handler.fn)
+  let remove = instance.on('bar', handler.fn)
+  remove()
+  remove()
+  instance.emit('foo') // still emits, not removed
+  assert.equal(handler.calls.length, 1)
+})
+
+test('object payload', () => {
+  instance.emit('baz', { value: true })
+})
+
 test('emit: with invalid type', () => {
-  instance.emit('baz')
+  // @ts-expect-error
+  instance.emit('qux')
 })
 
 test.run()

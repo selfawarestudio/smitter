@@ -1,14 +1,14 @@
-export type EventType = string
-
-export type Handler = (payload: any) => void
+type EventMap = Record<string, any>
+type EventType<T extends EventMap> = string & keyof T
+type Handler<T> = (payload: T) => void
 
 export type HandlerMap = {
-  [key: EventType]: Handler[]
+  [K in keyof EventMap]: Array<(p: EventMap[K]) => void>
 }
 
-export interface Smitter {
-  emit(type: EventType, payload?: any): void
-  on(type: EventType, handler: Handler): () => void
+interface Smitter<T extends EventMap> {
+  on<K extends EventType<T>>(type: K, handler: Handler<T[K]>): () => void
+  emit<K extends EventType<T>>(type: K, payload?: T[K]): void
 }
 
 /**
@@ -16,37 +16,27 @@ export interface Smitter {
  * @name smitter
  * @returns {Smitter}
  */
-export let smitter = (): Smitter => {
+export function smitter<T extends EventMap>(): Smitter<T> {
   let all: HandlerMap = {}
 
   return {
     /**
      * Fire all handlers for the provided type.
-     *
-     * @param {EventType} type The event type to fire
-     * @param {any} payload Optionally pass arbitrary data to each handler
-     * @memberOf smitter
      */
-    emit(type: EventType, payload?: any): void {
-      all[type] ? all[type].map(handler => handler(payload)) : []
+    emit(type, payload): void {
+      ;(all[type] || []).map(handler => handler(payload))
     },
 
     /**
      * Add an event handler for the provided type.
-     *
-     * @param {EventType} type The name of the event to register
-     * @param {Handler} handler Function to fire for the given event type
-     * @returns {Function} Function to remove the event handler
-     * @memberOf smitter
      */
-    on(type: EventType, handler: Handler): () => void {
+    on(type, handler) {
       all[type] = (all[type] || []).concat(handler)
       let removed = false
       return () => {
-        if (!removed) {
-          removed = true
-          all[type].splice(all[type].indexOf(handler), 1)
-        }
+        if (removed) return
+        all[type].splice(all[type].indexOf(handler), 1)
+        removed = true
       }
     },
   }
