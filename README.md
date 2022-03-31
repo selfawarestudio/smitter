@@ -30,6 +30,25 @@ off()
 emitter.emit('hi', 'dad') // nothing
 ```
 
+### Typescript
+
+If you're using Typescript, you can strictly type your events and handlers.
+
+```typescript
+let emitter = smitter<{
+  hi: { name: string }
+}>()
+
+// strictly typed payloads
+emitter.on('hi', ({ name }) => {})
+
+// [E] Argument of type 'string' is not assignable to parameter of type { name: string }
+emitter.emit('hi', 'mom')
+
+// OK
+emitter.emit('hi', { name: 'mom' })
+```
+
 ## License
 
 [MIT License](https://opensource.org/licenses/MIT) © [Self Aware](https://selfaware.studio)
